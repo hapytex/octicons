@@ -1,0 +1,13 @@
+module Icons.Octicons where
+
+import Data.String(IsString(..))
+
+import Icons(Icon(..))
+
+newtype Octicon = Octicon { octiconName :: String } deriving (Show, Read, Eq, Ord)
+
+instance IsString Octicon where
+    fromString = Octicon
+
+instance Icon Octicon where
+    iconName = octiconName
