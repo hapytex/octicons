@@ -1,8 +1,16 @@
+-- vim:ft=haskell
+
+{-# LANGUAGE OverloadedStrings #-}
+
 module Icons.Octicons where
 
-import Data.String(IsString(..))
-
-import Icons(Icon(..))
+import Prelude hiding (span)
+import Data.String(IsString(fromString))
+import Icons(Icon(iconName))
+import Text.Blaze(ToMarkup(toMarkup), (!))
+import Text.Blaze.Html5(span)
+import Text.Blaze.Html5.Attributes(class_)
+import Text.Blaze.Internal(MarkupM(AddAttribute))
 
 newtype Octicon = Octicon { octiconName :: String } deriving (Show, Read, Eq, Ord)
 
@@ -11,6 +19,9 @@ instance IsString Octicon where
 
 instance Icon Octicon where
     iconName = octiconName
+
+instance ToMarkup Octicon where
+      toMarkup (Octicon a) = (span ! class_ (fromString ("octicon octicon-" <> a))) ""
 
 alert :: Octicon
 alert = Octicon "alert"
