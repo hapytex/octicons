@@ -7,6 +7,7 @@ cp "Icons/Octicons.template" "Icons/Octicons.hs"
 unzip -l 'tmp.zip' | grep -P -o '(?<=svg/)[^.]*(?=[.])' | sort | while read l; do
     v=$(sed -E 's/[-](\w)/\U\1/g' <<<"$l")
     echo ''
+    echo "-- | The $l octicon."
     echo "$v :: Octicon"
     echo "$v = Octicon \"$l\""
 done >> "Icons/Octicons.hs"
